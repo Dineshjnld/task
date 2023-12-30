@@ -5,13 +5,17 @@ const cors = require('cors');
 const app = express();
 const port = 4000;
 
-const uri = "mongodb+srv://Dineshjnld22:Dineshjnld@cluster0.veywk9d.mongodb.net/?retryWrites=true&w=majority";
+const uri = "mongodb+srv://dineshjnld:Dineshjnld22@cluster0.nqs3gl4.mongodb.net/?retryWrites=true&w=majority";
 
 const client = new MongoClient(uri, {
   serverApi: {
     version: ServerApiVersion.v1,
     strict: true,
     deprecationErrors: true,
+    useNewUrlParser: true,
+  useUnifiedTopology: true,
+  ssl: true,
+  sslValidate: false, // Set to true in production with valid certificates
   }
 });
 
@@ -27,7 +31,7 @@ app.get('/data', async (req, res) => {
 
     // Specify the database and collection
     const database = client.db("scheduler");
-    const collection = database.collection("doctor");
+    const collection = database.collection("Doctor");
 
     // Query the collection and retrieve data
     const result = await collection.find({}).toArray();
